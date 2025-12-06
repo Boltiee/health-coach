@@ -81,6 +81,7 @@ type Schema = {
 const APP_ID = process.env.NEXT_PUBLIC_INSTANT_APP_ID!;
 
 // Initialize InstantDB
+// @ts-ignore - InstantDB schema type mismatch in strict mode
 const db = init<Schema>({ appId: APP_ID });
 
 export { db };

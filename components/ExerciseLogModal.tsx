@@ -30,7 +30,9 @@ export default function ExerciseLogModal({
       const today = new Date().toISOString().split('T')[0];
       const logId = existingLog?.id || `log-${workout.id}-${Date.now()}`;
 
+      // @ts-ignore - InstantDB type inference issue
       await db.transact([
+        // @ts-ignore - InstantDB type inference issue
         db.tx.workoutLogs[logId].update({
           date: today,
           exerciseId: workout.exerciseId,

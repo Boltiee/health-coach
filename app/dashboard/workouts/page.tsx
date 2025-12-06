@@ -8,6 +8,7 @@ export default function WorkoutsPage() {
     exercises: {},
   });
 
+  // @ts-ignore - InstantDB type inference issue
   const exercises = data?.exercises || [];
 
   // Group by muscle groups

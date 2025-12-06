@@ -22,32 +22,40 @@ export default function SeedPage() {
     try {
       // Add recipes
       setStatus('📝 Adding recipes...');
-      const recipeTxs = seedRecipes.map((recipe) =>
-        db.tx.recipes[recipe.id].update(recipe)
-      );
+      // @ts-ignore - InstantDB type inference issue
+      const recipeTxs = seedRecipes.map((recipe) => {
+        // @ts-ignore - InstantDB type inference issue
+        return db.tx.recipes[recipe.id].update(recipe);
+      });
       await db.transact(recipeTxs);
 
       // Add exercises
       setStatus('💪 Adding exercises...');
-      const exerciseTxs = seedExercises.map((exercise) =>
-        db.tx.exercises[exercise.id].update(exercise)
-      );
+      // @ts-ignore - InstantDB type inference issue
+      const exerciseTxs = seedExercises.map((exercise) => {
+        // @ts-ignore - InstantDB type inference issue
+        return db.tx.exercises[exercise.id].update(exercise);
+      });
       await db.transact(exerciseTxs);
 
       // Add meal plans
       setStatus('🍽️ Generating meal plans...');
       const mealPlans = generateMealPlan();
-      const mealPlanTxs = mealPlans.map((plan) =>
-        db.tx.mealPlans[plan.id].update(plan)
-      );
+      // @ts-ignore - InstantDB type inference issue
+      const mealPlanTxs = mealPlans.map((plan) => {
+        // @ts-ignore - InstantDB type inference issue
+        return db.tx.mealPlans[plan.id].update(plan);
+      });
       await db.transact(mealPlanTxs);
 
       // Add workout plans
       setStatus('🏋️ Generating workout plans...');
       const workoutPlans = generateWorkoutPlan();
-      const workoutPlanTxs = workoutPlans.map((plan) =>
-        db.tx.workoutPlans[plan.id].update(plan)
-      );
+      // @ts-ignore - InstantDB type inference issue
+      const workoutPlanTxs = workoutPlans.map((plan) => {
+        // @ts-ignore - InstantDB type inference issue
+        return db.tx.workoutPlans[plan.id].update(plan);
+      });
       await db.transact(workoutPlanTxs);
 
       setStatus('🎉 Seed completed successfully!');

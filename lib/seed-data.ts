@@ -223,7 +223,7 @@ export function getWeekDates(): string[] {
 // Generate a week's meal plan
 export function generateMealPlan() {
   const dates = getWeekDates();
-  const mealPlans = [];
+  const mealPlans: any[] = [];
   
   dates.forEach((date, dayIndex) => {
     // Breakfast
@@ -257,7 +257,7 @@ export function generateMealPlan() {
 // Generate a week's workout plan
 export function generateWorkoutPlan() {
   const dates = getWeekDates();
-  const workoutPlans = [];
+  const workoutPlans: any[] = [];
   
   // Day 1: Push
   workoutPlans.push(

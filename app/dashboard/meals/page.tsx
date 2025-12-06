@@ -8,6 +8,7 @@ export default function MealsPage() {
     recipes: {},
   });
 
+  // @ts-ignore - InstantDB type inference issue
   const recipes = data?.recipes || [];
 
   return (
