@@ -5,7 +5,7 @@ import { db } from '@/lib/instant';
 export default function WorkoutsPage() {
   const { data } = db.useQuery({
     exercises: {},
-  });
+  } as const);
 
   const exercises = data?.exercises || [];
 

@@ -21,7 +21,7 @@ export default function DashboardPage() {
     },
     recipes: {},
     mealLogs: {},
-  });
+  } as const);
 
   // Query today's workout plans
   const { data: workoutData } = db.useQuery({
@@ -34,7 +34,7 @@ export default function DashboardPage() {
     },
     exercises: {},
     workoutLogs: {},
-  });
+  } as const);
 
   const mealPlans = mealPlansData?.mealPlans || [];
   const recipes = mealPlansData?.recipes || [];

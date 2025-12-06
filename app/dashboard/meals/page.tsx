@@ -5,7 +5,7 @@ import { db } from '@/lib/instant';
 export default function MealsPage() {
   const { data } = db.useQuery({
     recipes: {},
-  });
+  } as const);
 
   const recipes = data?.recipes || [];
 
