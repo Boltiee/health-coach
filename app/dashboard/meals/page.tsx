@@ -1,8 +1,13 @@
 'use client';
 
 import { db } from '@/lib/instant';
+import { useState } from 'react';
+import RecipeForm from '@/components/RecipeForm';
 
 export default function MealsPage() {
+  const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
+  const [showNewRecipeForm, setShowNewRecipeForm] = useState(false);
+
   // @ts-ignore - InstantDB type inference issue
   const { data } = db.useQuery({
     recipes: {},
@@ -13,9 +18,18 @@ export default function MealsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Recipe Box</h1>
-        <p className="text-gray-600">Your saved recipes</p>
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Recipe Box</h1>
+          <p className="text-gray-600">Your saved recipes</p>
+        </div>
+        <button
+          onClick={() => setShowNewRecipeForm(true)}
+          className="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition flex items-center gap-2"
+        >
+          <span className="text-xl">+</span>
+          Add Recipe
+        </button>
       </div>
 
       {recipes.length === 0 ? (
@@ -44,7 +58,7 @@ export default function MealsPage() {
                   <span>{recipe.protein}g protein</span>
                   <span>{recipe.portions} serving</span>
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-600 mb-3">
                   <p className="font-medium mb-1">Ingredients:</p>
                   <ul className="list-disc list-inside space-y-1">
                     {recipe.ingredients.slice(0, 3).map((ing: string, idx: number) => (
@@ -59,10 +73,30 @@ export default function MealsPage() {
                     )}
                   </ul>
                 </div>
+                <button
+                  onClick={() => setSelectedRecipe(recipe)}
+                  className="w-full px-3 py-2 border border-primary-600 text-primary-600 rounded-lg font-medium hover:bg-primary-50 transition text-sm"
+                >
+                  Edit Recipe
+                </button>
               </div>
             </div>
           ))}
         </div>
+      )}
+
+      {/* Recipe Form Modals */}
+      {showNewRecipeForm && (
+        <RecipeForm
+          onClose={() => setShowNewRecipeForm(false)}
+        />
+      )}
+
+      {selectedRecipe && (
+        <RecipeForm
+          recipe={selectedRecipe}
+          onClose={() => setSelectedRecipe(null)}
+        />
       )}
     </div>
   );

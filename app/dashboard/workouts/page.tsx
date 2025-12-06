@@ -1,8 +1,13 @@
 'use client';
 
 import { db } from '@/lib/instant';
+import { useState } from 'react';
+import ExerciseForm from '@/components/ExerciseForm';
 
 export default function WorkoutsPage() {
+  const [selectedExercise, setSelectedExercise] = useState<any>(null);
+  const [showNewExerciseForm, setShowNewExerciseForm] = useState(false);
+
   // @ts-ignore - InstantDB type inference issue
   const { data } = db.useQuery({
     exercises: {},
@@ -23,11 +28,20 @@ export default function WorkoutsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Exercise Library
-        </h1>
-        <p className="text-gray-600">Available exercises</p>
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Exercise Library
+          </h1>
+          <p className="text-gray-600">Available exercises</p>
+        </div>
+        <button
+          onClick={() => setShowNewExerciseForm(true)}
+          className="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition flex items-center gap-2"
+        >
+          <span className="text-xl">+</span>
+          Add Exercise
+        </button>
       </div>
 
       {exercises.length === 0 ? (
@@ -53,7 +67,7 @@ export default function WorkoutsPage() {
                     <h3 className="font-bold text-lg text-gray-900 mb-2">
                       {exercise.name}
                     </h3>
-                    <div className="space-y-2 text-sm text-gray-600">
+                    <div className="space-y-2 text-sm text-gray-600 mb-3">
                       {exercise.equipment && exercise.equipment.length > 0 && (
                         <div>
                           <span className="font-medium">Equipment:</span>{' '}
@@ -72,12 +86,32 @@ export default function WorkoutsPage() {
                         </div>
                       )}
                     </div>
+                    <button
+                      onClick={() => setSelectedExercise(exercise)}
+                      className="w-full px-3 py-2 border border-primary-600 text-primary-600 rounded-lg font-medium hover:bg-primary-50 transition text-sm"
+                    >
+                      Edit Exercise
+                    </button>
                   </div>
                 ))}
               </div>
             </div>
           ))}
         </div>
+      )}
+
+      {/* Exercise Form Modals */}
+      {showNewExerciseForm && (
+        <ExerciseForm
+          onClose={() => setShowNewExerciseForm(false)}
+        />
+      )}
+
+      {selectedExercise && (
+        <ExerciseForm
+          exercise={selectedExercise}
+          onClose={() => setSelectedExercise(null)}
+        />
       )}
     </div>
   );

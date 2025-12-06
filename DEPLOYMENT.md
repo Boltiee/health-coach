@@ -1,26 +1,59 @@
 # Deployment Guide
 
-## Step 1: Create GitHub Repository
+## Step 1: Initialize Git Repository and Commit Files
+
+If you haven't already initialized git, run these commands:
+
+```bash
+cd "/Users/lucbo/workspaces/Health Coach"
+
+# Initialize git repository (skip if already done)
+git init
+
+# Add all files to staging
+git add .
+
+# Create initial commit with all project files
+git commit -m "Initial commit: Health Coach app with InstantDB integration"
+```
+
+**What gets committed:**
+- All source code (`app/`, `components/`, `lib/`)
+- Configuration files (`package.json`, `next.config.ts`, `tsconfig.json`, etc.)
+- Documentation (`README.md`, `DEPLOYMENT.md`, `QUICKSTART.md`)
+- Public assets (`manifest.json`, icon placeholders)
+
+**Note:** `node_modules/` is automatically excluded via `.gitignore`.
+
+## Step 2: Create GitHub Repository
 
 1. Go to [github.com](https://github.com) and create a new repository
 2. Name it something like `health-coach` or `fitness-tracker`
 3. **DO NOT** initialize with README, .gitignore, or license (we already have these)
 4. Copy the remote URL (e.g., `https://github.com/yourusername/health-coach.git`)
 
-## Step 2: Push to GitHub
+## Step 3: Push to GitHub
 
 Run these commands in your terminal:
 
 ```bash
 cd "/Users/lucbo/workspaces/Health Coach"
+
+# Add GitHub remote
 git remote add origin YOUR_GITHUB_URL
+
+# Ensure you're on main branch
 git branch -M main
+
+# Push all commits to GitHub
 git push -u origin main
 ```
 
-Replace `YOUR_GITHUB_URL` with the URL from step 1.
+Replace `YOUR_GITHUB_URL` with the URL from Step 2.
 
-## Step 3: Deploy to Vercel
+After running these commands, all your code will be on GitHub!
+
+## Step 4: Deploy to Vercel
 
 ### Option A: Deploy via Vercel Dashboard (Recommended)
 
@@ -49,7 +82,7 @@ vercel
 
 Follow the prompts and add the environment variable when prompted.
 
-## Step 4: Add PWA Icons (Optional but Recommended)
+## Step 5: Add PWA Icons (Optional but Recommended)
 
 The app currently has placeholder icons. To make your PWA look professional:
 
@@ -69,7 +102,7 @@ git push
 
 Vercel will automatically redeploy.
 
-## Step 5: First Use
+## Step 6: First Use
 
 1. Visit your deployed URL (e.g., `https://health-coach.vercel.app`)
 2. Sign in with your email
