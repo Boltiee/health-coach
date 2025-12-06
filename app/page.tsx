@@ -1,15 +1,22 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import AuthGuard from '@/components/AuthGuard';
+
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/dashboard');
+  }, [router]);
+
   return (
-    <main className="min-h-screen p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-primary-600 mb-4">
-          Health Coach
-        </h1>
-        <p className="text-lg text-gray-700 dark:text-gray-300">
-          Your personal health and fitness companion
-        </p>
+    <AuthGuard>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
       </div>
-    </main>
+    </AuthGuard>
   );
 }
 
