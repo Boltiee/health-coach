@@ -1,9 +1,30 @@
 // Seed data for recipes and exercises
 // This will be used to populate the database initially
+import { id } from '@instantdb/react';
+
+// Generate stable UUIDs for seed data
+export const RECIPE_IDS = {
+  yogurtBowl: id(),
+  chickenQuinoa: id(),
+  salmon: id(),
+  smoothie: id(),
+  turkeyWrap: id(),
+};
+
+export const EXERCISE_IDS = {
+  pushups: id(),
+  dumbbellBench: id(),
+  squats: id(),
+  romanianDeadlift: id(),
+  dumbbellRows: id(),
+  plank: id(),
+  shoulderPress: id(),
+  lunges: id(),
+};
 
 export const seedRecipes = [
   {
-    id: 'recipe-1',
+    id: RECIPE_IDS.yogurtBowl,
     title: 'Greek Yogurt Bowl with Berries',
     ingredients: [
       '200g Greek yogurt',
@@ -24,7 +45,7 @@ export const seedRecipes = [
     createdAt: Date.now(),
   },
   {
-    id: 'recipe-2',
+    id: RECIPE_IDS.chickenQuinoa,
     title: 'Grilled Chicken & Quinoa Bowl',
     ingredients: [
       '150g chicken breast',
@@ -50,7 +71,7 @@ export const seedRecipes = [
     createdAt: Date.now(),
   },
   {
-    id: 'recipe-3',
+    id: RECIPE_IDS.salmon,
     title: 'Salmon with Roasted Vegetables',
     ingredients: [
       '150g salmon fillet',
@@ -74,7 +95,7 @@ export const seedRecipes = [
     createdAt: Date.now(),
   },
   {
-    id: 'recipe-4',
+    id: RECIPE_IDS.smoothie,
     title: 'Protein Smoothie',
     ingredients: [
       '1 banana',
@@ -95,7 +116,7 @@ export const seedRecipes = [
     createdAt: Date.now(),
   },
   {
-    id: 'recipe-5',
+    id: RECIPE_IDS.turkeyWrap,
     title: 'Turkey & Avocado Wrap',
     ingredients: [
       '1 whole wheat tortilla',
@@ -120,7 +141,7 @@ export const seedRecipes = [
 
 export const seedExercises = [
   {
-    id: 'ex-1',
+    id: EXERCISE_IDS.pushups,
     name: 'Push-ups',
     equipment: ['none'],
     muscleGroups: ['chest', 'triceps', 'shoulders'],
@@ -128,7 +149,7 @@ export const seedExercises = [
     tips: 'Keep your core tight and body in a straight line',
   },
   {
-    id: 'ex-2',
+    id: EXERCISE_IDS.dumbbellBench,
     name: 'Dumbbell Bench Press',
     equipment: ['dumbbells', 'bench'],
     muscleGroups: ['chest', 'triceps', 'shoulders'],
@@ -136,7 +157,7 @@ export const seedExercises = [
     tips: 'Lower dumbbells slowly, press explosively',
   },
   {
-    id: 'ex-3',
+    id: EXERCISE_IDS.squats,
     name: 'Bodyweight Squats',
     equipment: ['none'],
     muscleGroups: ['quads', 'glutes', 'hamstrings'],
@@ -144,7 +165,7 @@ export const seedExercises = [
     tips: 'Keep chest up, knees tracking over toes',
   },
   {
-    id: 'ex-4',
+    id: EXERCISE_IDS.romanianDeadlift,
     name: 'Dumbbell Romanian Deadlift',
     equipment: ['dumbbells'],
     muscleGroups: ['hamstrings', 'glutes', 'lower back'],
@@ -152,7 +173,7 @@ export const seedExercises = [
     tips: 'Keep slight knee bend, hinge at hips',
   },
   {
-    id: 'ex-5',
+    id: EXERCISE_IDS.dumbbellRows,
     name: 'Dumbbell Rows',
     equipment: ['dumbbells', 'bench'],
     muscleGroups: ['back', 'biceps'],
@@ -160,7 +181,7 @@ export const seedExercises = [
     tips: 'Pull elbow back, squeeze shoulder blade',
   },
   {
-    id: 'ex-6',
+    id: EXERCISE_IDS.plank,
     name: 'Plank',
     equipment: ['none'],
     muscleGroups: ['core', 'abs'],
@@ -168,7 +189,7 @@ export const seedExercises = [
     tips: 'Keep body straight, don\'t let hips sag',
   },
   {
-    id: 'ex-7',
+    id: EXERCISE_IDS.shoulderPress,
     name: 'Dumbbell Shoulder Press',
     equipment: ['dumbbells'],
     muscleGroups: ['shoulders', 'triceps'],
@@ -176,7 +197,7 @@ export const seedExercises = [
     tips: 'Press straight up, keep core engaged',
   },
   {
-    id: 'ex-8',
+    id: EXERCISE_IDS.lunges,
     name: 'Lunges',
     equipment: ['none'],
     muscleGroups: ['quads', 'glutes'],
@@ -207,26 +228,26 @@ export function generateMealPlan() {
   dates.forEach((date, dayIndex) => {
     // Breakfast
     mealPlans.push({
-      id: `meal-${date}-breakfast`,
+      id: id(),
       date,
       mealType: 'breakfast' as const,
-      recipeId: dayIndex % 2 === 0 ? 'recipe-1' : 'recipe-4',
+      recipeId: dayIndex % 2 === 0 ? RECIPE_IDS.yogurtBowl : RECIPE_IDS.smoothie,
     });
     
     // Lunch
     mealPlans.push({
-      id: `meal-${date}-lunch`,
+      id: id(),
       date,
       mealType: 'lunch' as const,
-      recipeId: dayIndex % 3 === 0 ? 'recipe-2' : 'recipe-5',
+      recipeId: dayIndex % 3 === 0 ? RECIPE_IDS.chickenQuinoa : RECIPE_IDS.turkeyWrap,
     });
     
     // Dinner
     mealPlans.push({
-      id: `meal-${date}-dinner`,
+      id: id(),
       date,
       mealType: 'dinner' as const,
-      recipeId: dayIndex % 2 === 0 ? 'recipe-3' : 'recipe-2',
+      recipeId: dayIndex % 2 === 0 ? RECIPE_IDS.salmon : RECIPE_IDS.chickenQuinoa,
     });
   });
   
@@ -241,26 +262,26 @@ export function generateWorkoutPlan() {
   // Day 1: Push
   workoutPlans.push(
     {
-      id: `workout-${dates[0]}-1`,
+      id: id(),
       date: dates[0],
-      exerciseId: 'ex-1',
+      exerciseId: EXERCISE_IDS.pushups,
       targetSets: 3,
       targetReps: 12,
       order: 1,
     },
     {
-      id: `workout-${dates[0]}-2`,
+      id: id(),
       date: dates[0],
-      exerciseId: 'ex-2',
+      exerciseId: EXERCISE_IDS.dumbbellBench,
       targetSets: 4,
       targetReps: 10,
       targetWeight: 20,
       order: 2,
     },
     {
-      id: `workout-${dates[0]}-3`,
+      id: id(),
       date: dates[0],
-      exerciseId: 'ex-7',
+      exerciseId: EXERCISE_IDS.shoulderPress,
       targetSets: 3,
       targetReps: 12,
       targetWeight: 15,
@@ -271,25 +292,25 @@ export function generateWorkoutPlan() {
   // Day 2: Legs
   workoutPlans.push(
     {
-      id: `workout-${dates[1]}-1`,
+      id: id(),
       date: dates[1],
-      exerciseId: 'ex-3',
+      exerciseId: EXERCISE_IDS.squats,
       targetSets: 4,
       targetReps: 15,
       order: 1,
     },
     {
-      id: `workout-${dates[1]}-2`,
+      id: id(),
       date: dates[1],
-      exerciseId: 'ex-8',
+      exerciseId: EXERCISE_IDS.lunges,
       targetSets: 3,
       targetReps: 12,
       order: 2,
     },
     {
-      id: `workout-${dates[1]}-3`,
+      id: id(),
       date: dates[1],
-      exerciseId: 'ex-4',
+      exerciseId: EXERCISE_IDS.romanianDeadlift,
       targetSets: 3,
       targetReps: 12,
       targetWeight: 25,
@@ -302,26 +323,26 @@ export function generateWorkoutPlan() {
   // Day 4: Pull
   workoutPlans.push(
     {
-      id: `workout-${dates[3]}-1`,
+      id: id(),
       date: dates[3],
-      exerciseId: 'ex-5',
+      exerciseId: EXERCISE_IDS.dumbbellRows,
       targetSets: 4,
       targetReps: 10,
       targetWeight: 20,
       order: 1,
     },
     {
-      id: `workout-${dates[3]}-2`,
+      id: id(),
       date: dates[3],
-      exerciseId: 'ex-1',
+      exerciseId: EXERCISE_IDS.pushups,
       targetSets: 3,
       targetReps: 12,
       order: 2,
     },
     {
-      id: `workout-${dates[3]}-3`,
+      id: id(),
       date: dates[3],
-      exerciseId: 'ex-6',
+      exerciseId: EXERCISE_IDS.plank,
       targetSets: 3,
       targetReps: 60,
       tips: 'Hold for 60 seconds',
@@ -332,26 +353,26 @@ export function generateWorkoutPlan() {
   // Day 5: Full Body
   workoutPlans.push(
     {
-      id: `workout-${dates[4]}-1`,
+      id: id(),
       date: dates[4],
-      exerciseId: 'ex-2',
+      exerciseId: EXERCISE_IDS.dumbbellBench,
       targetSets: 3,
       targetReps: 12,
       targetWeight: 20,
       order: 1,
     },
     {
-      id: `workout-${dates[4]}-2`,
+      id: id(),
       date: dates[4],
-      exerciseId: 'ex-3',
+      exerciseId: EXERCISE_IDS.squats,
       targetSets: 3,
       targetReps: 15,
       order: 2,
     },
     {
-      id: `workout-${dates[4]}-3`,
+      id: id(),
       date: dates[4],
-      exerciseId: 'ex-5',
+      exerciseId: EXERCISE_IDS.dumbbellRows,
       targetSets: 3,
       targetReps: 10,
       targetWeight: 20,
