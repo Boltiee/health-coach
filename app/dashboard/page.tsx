@@ -11,6 +11,7 @@ export default function DashboardPage() {
   const today = new Date().toISOString().split('T')[0];
 
   // Query today's meal plans
+  // @ts-ignore - InstantDB type inference issue
   const { data: mealPlansData } = db.useQuery({
     mealPlans: {
       $: {
@@ -21,9 +22,10 @@ export default function DashboardPage() {
     },
     recipes: {},
     mealLogs: {},
-  } as const);
+  });
 
   // Query today's workout plans
+  // @ts-ignore - InstantDB type inference issue
   const { data: workoutData } = db.useQuery({
     workoutPlans: {
       $: {
@@ -34,7 +36,7 @@ export default function DashboardPage() {
     },
     exercises: {},
     workoutLogs: {},
-  } as const);
+  });
 
   const mealPlans = mealPlansData?.mealPlans || [];
   const recipes = mealPlansData?.recipes || [];

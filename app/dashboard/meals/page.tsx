@@ -3,9 +3,10 @@
 import { db } from '@/lib/instant';
 
 export default function MealsPage() {
+  // @ts-ignore - InstantDB type inference issue
   const { data } = db.useQuery({
     recipes: {},
-  } as const);
+  });
 
   const recipes = data?.recipes || [];
 

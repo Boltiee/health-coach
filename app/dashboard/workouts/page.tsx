@@ -3,9 +3,10 @@
 import { db } from '@/lib/instant';
 
 export default function WorkoutsPage() {
+  // @ts-ignore - InstantDB type inference issue
   const { data } = db.useQuery({
     exercises: {},
-  } as const);
+  });
 
   const exercises = data?.exercises || [];
 
